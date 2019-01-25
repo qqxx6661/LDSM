@@ -7,7 +7,7 @@
 @time: 2019/1/24 20:42
 """
 
-
+# 模逆运算：欧几里得算法
 def egcd(a, b):
     if a == 0:
         return (b, 0, 1)
@@ -16,6 +16,7 @@ def egcd(a, b):
         return (g, x - (b // a) * y, y)
 
 
+# 模逆运算
 def modinv(a, m):
     g, x, y = egcd(a, m)
     if g != 1:
@@ -25,4 +26,4 @@ def modinv(a, m):
 
 
 if __name__ == "__main__":
-    print(modinv(8, 221))
+    print(modinv(96, 3127))
