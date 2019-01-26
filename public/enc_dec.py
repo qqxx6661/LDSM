@@ -26,4 +26,4 @@ def modinv(a, m):
 
 
 if __name__ == "__main__":
-    print(modinv(96, 3127))
+    print(modinv(12, 1517))

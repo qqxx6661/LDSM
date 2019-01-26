@@ -8,8 +8,11 @@
 """
 import math
 
-def get_update_c_e(k, a_e, s_e, j):
-    return int(k * a_e * math.pow(s_e, j))
+
+# 像老代码一样加%n
+def get_update_c_e(k, a_e, s_e, j, N):
+    return int(k * a_e * math.pow(s_e, j) % N)
+
 
 def get_add_c_e(a_e_plus, b_e_plus, N):
     return (a_e_plus + b_e_plus) % N
