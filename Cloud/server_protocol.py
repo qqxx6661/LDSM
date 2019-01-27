@@ -17,6 +17,9 @@ def get_update_c_e(k, a_e, s_e, j, N):
 def get_add_c_e(a_e_plus, b_e_plus, N):
     return (a_e_plus + b_e_plus) % N
 
+def get_minus_c_e(a_e_plus, b_e_plus, N):
+    return (a_e_plus - b_e_plus) % N
+
 
 if __name__ == "__main__":
     print(get_update_c_e(1998, 190, 37, 3))
