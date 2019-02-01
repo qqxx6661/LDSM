@@ -17,7 +17,7 @@ def get_update_c_e(k, a_e, s_e, j, N):
 def get_add_c_e(a_e_plus, b_e_plus, N):
     return (a_e_plus + b_e_plus) % N
 
-def get_minus_c_e(a_e_plus, b_e_plus, N):
+def get_sub_c_e(a_e_plus, b_e_plus, N):
     return (a_e_plus - b_e_plus) % N
 
 

@@ -6,6 +6,7 @@
 @file: main.py
 @time: 2019/1/25 21:26
 """
+import datetime
 
 import Edge.client_protocol
 import Cloud.server_protocol
@@ -47,42 +48,42 @@ def decrypt(client_id, column_name, row_id, v_e):
 def add(client_id, column_name_1, column_name_2, v_1_e, v_2_e, s_e):
     temp = client_column_key_dict[client_id]["s"]
     x_s, y_s = temp[0], temp[1]
-    print("x_s,y_s = ", x_s, ",", y_s)
+    # print("x_s,y_s = ", x_s, ",", y_s)
     # x_c = Edge.client_protocol.generate_x()
     # y_c = Edge.client_protocol.generate_y()
     x_c = 4
     y_c = 4
-    print("x_c,y_c = ", x_c, ",", y_c)
+    # print("x_c,y_c = ", x_c, ",", y_c)
 
     # 数1
     # 得到j,k
     temp = client_column_key_dict[client_id][column_name_1]
     x_a_1, y_a_1 = temp[0], temp[1]
-    print("x_a_1, y_a_1 = ", x_a_1, ",", y_a_1)
+    # print("x_a_1, y_a_1 = ", x_a_1, ",", y_a_1)
     j = Edge.client_protocol.get_update_j(y_a_1, y_c, y_s, fN, N)
     k = Edge.client_protocol.get_update_k(x_a_1, x_c, x_s, j, N)
-    print("j, k:", j, k)
+    # print("j, k:", j, k)
     # 得到中间密文c_e
     update_c_e_1 = Cloud.server_protocol.get_update_c_e(k, v_1_e, s_e, j, N)
-    print("c_e_1:", update_c_e_1)
+    # print("c_e_1:", update_c_e_1)
 
     # 数2
     temp = client_column_key_dict[client_id][column_name_2]
     x_a_2, y_a_2 = temp[0], temp[1]
-    print("x_a_2, y_a_2 = ", x_a_2, ",", y_a_2)
+    # print("x_a_2, y_a_2 = ", x_a_2, ",", y_a_2)
     j = Edge.client_protocol.get_update_j(y_a_2, y_c, y_s, fN, N)
     k = Edge.client_protocol.get_update_k(x_a_2, x_c, x_s, j, N)
-    print("j, k:", j, k)
+    # print("j, k:", j, k)
     # 得到中间密文c_e
     update_c_e_2 = Cloud.server_protocol.get_update_c_e(k, v_2_e, s_e, j, N)
-    print("c_e_2:", update_c_e_2)
+    # print("c_e_2:", update_c_e_2)
 
     # 加法
     c_e = Cloud.server_protocol.get_add_c_e(update_c_e_1, update_c_e_2, N)
     return x_c, y_c, c_e
 
 
-def minus(client_id, column_name_1, column_name_2, v_1_e, v_2_e, s_e):
+def sb(client_id, column_name_1, column_name_2, v_1_e, v_2_e, s_e):
     temp = client_column_key_dict[client_id]["s"]
     x_s, y_s = temp[0], temp[1]
     print("x_s,y_s = ", x_s, ",", y_s)
@@ -116,7 +117,7 @@ def minus(client_id, column_name_1, column_name_2, v_1_e, v_2_e, s_e):
     print("c_e_2:", update_c_e_2)
 
     # 减法
-    c_e = Cloud.server_protocol.get_minus_c_e(update_c_e_1, update_c_e_2, N)
+    c_e = Cloud.server_protocol.get_sub_c_e(update_c_e_1, update_c_e_2, N)
     return x_c, y_c, c_e
 
 
@@ -164,6 +165,8 @@ if __name__ == "__main__":
 
     dec_row_dict_2 = {}
 
+    print("列密钥：", client_column_key_dict)
+
     # 加密
     for key, value in row_dict.items():
         if key == "row_id":
@@ -182,27 +185,41 @@ if __name__ == "__main__":
     print("加密后列enc_row_dict：", enc_row_dict)
     print("加密后列enc_row_dict_2：", enc_row_dict_2)
 
-    # 加法算出x_1+x_2并存入加密列
-    x_c, y_c, c_e = add("1", "x_1", "x_2", enc_row_dict["x_1"], enc_row_dict["x_2"], enc_row_dict["s"])
-    client_column_key_dict["1"]["x_1+x_2"] = (x_c, y_c)
-    enc_row_dict["x_1+x_2"] = c_e
-    print("c_e:", c_e)
-    print("加法运算后将密文插入CDB，将秘钥插入DO完成")
-    print("加法运算后密文列：", enc_row_dict)
 
-    # 乘法运算（x_1和y_1乘-1）并存入加密列
-    x_c, y_c, c_e = multiple_EC("1", "x_1", -1, enc_row_dict["x_1"])
-    client_column_key_dict["1"]["-x_1"] = (x_c, y_c)
-    enc_row_dict["-x_1"] = c_e
-    x_c, y_c, c_e = multiple_EC("1", "x_2", -1, enc_row_dict["x_2"])
-    client_column_key_dict["1"]["-x_2"] = (x_c, y_c)
-    enc_row_dict["-x_2"] = c_e
-    print("乘法运算后密文列：", enc_row_dict)
+    start_time = datetime.datetime.now()  # 程序开始时间
+    for i in range(6000):
 
-    print("列密钥：", client_column_key_dict)
+        # 加法算出x_1+x_2并存入加密列
+        x_c, y_c, c_e = add("1", "x_1", "x_2", enc_row_dict["x_1"], enc_row_dict["x_2"], enc_row_dict["s"])
+        client_column_key_dict["1"]["x_1+x_2"] = (x_c, y_c)
+        enc_row_dict["x_1+x_2"] = c_e
+        # print("加法运算后将密文插入CDB，将秘钥插入DO完成")
+        # print("加法运算后密文列：", enc_row_dict)
+
+
+    over_time = datetime.datetime.now()  # 程序结束时间
+    total_time = over_time - start_time
+    print(start_time, over_time, '加法共计%s微秒' % total_time.microseconds)
+
+    start_time = datetime.datetime.now()  # 程序开始时间
+    for i in range(6000):
+
+        # 乘法运算（x_1和y_1乘-1）并存入加密列
+        x_c, y_c, c_e = multiple_EC("1", "x_1", -1, enc_row_dict["x_1"])
+        client_column_key_dict["1"]["-x_1"] = (x_c, y_c)
+        enc_row_dict["-x_1"] = c_e
+        x_c, y_c, c_e = multiple_EC("1", "x_2", -1, enc_row_dict["x_2"])
+        client_column_key_dict["1"]["-x_2"] = (x_c, y_c)
+        enc_row_dict["-x_2"] = c_e
+        # print("乘法运算后密文列：", enc_row_dict)
+
+    over_time = datetime.datetime.now()  # 程序结束时间
+    total_time = over_time - start_time
+    print(start_time, over_time, '乘法共计%s微秒' % total_time.microseconds)
+
+
 
     # 乘以-1后解密数加上n即为实际的负数
-
     # 更新第二行列密钥后求和,将第二行的x_1键更新为-x_1会有负数求modinv，试着反过来
     # temp = client_column_key_dict["1"]["s"]
     # x_s, y_s = temp[0], temp[1]
@@ -225,6 +242,8 @@ if __name__ == "__main__":
 
 
 
+
+
     # 解密
     for key, value in enc_row_dict.items():
         if key == "row_id":
@@ -240,6 +259,5 @@ if __name__ == "__main__":
         # print("---------")
 
     # 解密后
-    print("列密钥：", client_column_key_dict)
     print("解密后列dec_row_dict：", dec_row_dict)
     print("解密后列dec_row_dict_2：", dec_row_dict_2)
