@@ -13,8 +13,8 @@ error = [0.005, ] * 3  # 生成一个包含有n个值，均为0.2的list，表�
 
 plt.xlabel('Camera Numbers', fontsize=18.5)
 plt.ylabel('Average Time Cost (ms)', fontsize=18.5)
-plt.bar(x - 0.45 * width, encrypt, color="w", edgecolor="k", hatch="--", width=0.75 * width, label='Encrypt', yerr=error)
-plt.bar(x + 0.45 * width, decrypt, color="w", edgecolor="k", hatch="////", width=0.75 * width, label='Decrypt', yerr=error)
+plt.bar(x - 0.45 * width, encrypt, color="#AFEEEE", width=0.75 * width, label='Encrypt', yerr=error)
+plt.bar(x + 0.45 * width, decrypt, color="#800000", width=0.75 * width, label='Decrypt', yerr=error)
 plt.xticks(x, ("1", "8", "60(simulation)"), fontsize=16)
 plt.yticks(fontsize=18)
 plt.legend(loc='upper left', fontsize=12)

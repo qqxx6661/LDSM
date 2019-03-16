@@ -28,7 +28,7 @@ error = [0.00001, ] * 3  # 生成一个包含有n个值，均为0.2的list，表
 
 plt.xlabel('Operation', fontsize=18.5)
 plt.ylabel('Average Time Cost (ms)', fontsize=18.5)
-rect = plt.bar(x, miwen, color="w", edgecolor="k", hatch="//", width=0.75 * width, label='Ciphertext', yerr=error)
+rect = plt.bar(x, miwen, color="#800000", width=0.75 * width, label='Ciphertext', yerr=error)
 plt.xticks(x, ("Mul", "Add", "Sub"), fontsize=16)
 plt.yticks(fontsize=18)
 plt.legend(loc='upper left', fontsize=12)
