@@ -8,17 +8,17 @@ def autolabel(rects):
         plt.text(rect.get_x() + rect.get_width() / 2., 1.03 * height, "%s" % float(height), ha='center')
 
 
+# 由于要加上字符x，要单独写
 text = ["10.65x", "57.62x", "54.44x"]
-
 
 def autolabel_user(rects):
     for i, rect in enumerate(rects):
-        height = text[i]
+        txt = text[i]
         if i == 0:  # 由于第一个数字贴着柱子，特殊照顾
-            plt.text(rect.get_x() + rect.get_width() / 2, rect.get_height() * 1.16, "%s" % height, fontsize=10,
+            plt.text(rect.get_x() + rect.get_width() / 2, rect.get_height() * 1.16, "%s" % txt, fontsize=10,
                      ha='center')
         else:
-            plt.text(rect.get_x() + rect.get_width() / 2, rect.get_height() * 1.02, "%s" % height, fontsize=10, ha='center')
+            plt.text(rect.get_x() + rect.get_width() / 2, rect.get_height() * 1.02, "%s" % txt, fontsize=10, ha='center')
 
 
 size = 3
