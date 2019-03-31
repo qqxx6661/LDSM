@@ -20,8 +20,8 @@ print(y1)
 print(y2)
 
 plt.grid(axis="y", zorder=0.5)  # 生成网格,zorder越小代表越底层，bar设置为1.8刚好不遮住误差线
-ax1.plot(x, y1, 'o-', color="#03BABA",  label="1-cam scenario")
-ax1.plot(x, y2, '^-', color="#800000", label="8-cam scenario")
+ax1.plot(x, y1, 'o-', color="#00807F",  label="1-cam scenario")
+ax1.plot(x, y2, '^-', color="#7E0100", label="8-cam scenario")
 plt.xticks((0, 30, 60, 90, 120, 150, 180), fontsize=14)
 plt.yticks(fontsize=14)
 plt.legend(fontsize=12)

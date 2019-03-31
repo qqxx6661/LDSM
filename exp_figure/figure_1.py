@@ -30,9 +30,9 @@ error = [0.003, ] * 3  # 生成一个包含有n个值，均为0.003的list，表
 
 plt.xlabel('Camera Numbers', fontsize=16)
 plt.ylabel('Average Time Cost (ms)', fontsize=16)
-rect1 = plt.bar(x - 0.45 * width, encrypt, fc='#03BABA', width=0.75 * width, label='Encrypt', yerr=error, capsize=8,
+rect1 = plt.bar(x - 0.45 * width, encrypt, fc='#00807F', width=0.75 * width, label='Encrypt', yerr=error, capsize=8,
         hatch="\\\\\\", edgecolor="k", zorder=1.8)
-rect2 = plt.bar(x + 0.45 * width, decrypt, fc='#800000', width=0.75 * width, label='Decrypt', yerr=error, capsize=8,
+rect2 = plt.bar(x + 0.45 * width, decrypt, fc='#7E0100', width=0.75 * width, label='Decrypt', yerr=error, capsize=8,
         hatch="xxx", edgecolor="k", zorder=1.8)
 plt.xticks(x, ("1", "8", "60(simulation)"), fontsize=14)
 plt.yticks(fontsize=14)

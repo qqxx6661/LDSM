@@ -34,7 +34,7 @@ error = [0.0001, ] * 3  # 生成一个包含有n个值，均为0.00001的list，
 
 plt.xlabel('Operation', fontsize=16)
 plt.ylabel('Average Time Cost (ms)', fontsize=16)
-rect = plt.bar(x, miwen, color="#FF8001", width=0.75 * width, label='Ciphertext', capsize=8, edgecolor="k", zorder=1.8, yerr=error)
+rect = plt.bar(x, miwen, color="#FE7E01", width=0.75 * width, label='Ciphertext', capsize=8, edgecolor="k", zorder=1.8, yerr=error)
 plt.xticks(x, ("Mul", "Add", "Sub"), fontsize=14)
 plt.yticks(fontsize=14)
 plt.legend(loc='upper left', fontsize=12)
